@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"log"
 	"net"
+	"os"
 	"strings"
 )
 
@@ -29,10 +30,9 @@ func sendRconCommand(conn net.Conn, command string, password string) (err error)
 
 func main() {
 	ctx, cancel := context.WithCancel(context.Background())
-
 	defer cancel()
 
-	password := "freeforall"
+	password := os.Getenv("RCONBOT_QUAKE3_PASSWORD")
 	command := "status"
 
 	var d net.Dialer
